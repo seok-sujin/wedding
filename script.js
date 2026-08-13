@@ -142,7 +142,9 @@ const galleryImages = [
 
 
 // 🔻사진 추가시 jpg" 끝에 , 찍고 복사 붙여넣기
-  "images/photo9.jpg"
+  "images/photo9.jpg",
+    "images/photo10.jpg",
+    "images/photo11.jpg"
 
 
 // 🔻아래에 복사 붙여넣기 하고 마지막 번호는 , 뺴기
@@ -237,8 +239,10 @@ function renderKakaoMap() {
   new daum.roughmap.Lander({
 
 // 🔻네비게이션 설정 : 카카오맵에서 소스생성하기 진행(현재 웨딩시그니처로 되어있음, 가이드북 참고)
-    timestamp: "1786011750983",
-    key: "sgirnpsw48g",
+
+
+		timestamp : "1786612797117",
+		key : "sia6uuzxkh9",
 
     mapWidth: "100%",
     mapHeight: "280"
