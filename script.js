@@ -144,8 +144,11 @@ const galleryImages = [
 // 🔻사진 추가시 jpg" 끝에 , 찍고 복사 붙여넣기
   "images/photo9.jpg",
     "images/photo10.jpg",
-    "images/photo11.jpg"
-
+    "images/photo11.jpg",
+	"images/photo12.jpg",
+	"images/photo13.jpg",
+	"images/photo14.jpg",
+	"images/photo15.jpg"
 
 // 🔻아래에 복사 붙여넣기 하고 마지막 번호는 , 뺴기
 
@@ -241,8 +244,8 @@ function renderKakaoMap() {
 // 🔻네비게이션 설정 : 카카오맵에서 소스생성하기 진행(현재 웨딩시그니처로 되어있음, 가이드북 참고)
 
 
-		timestamp : "1786612797117",
-		key : "sia6uuzxkh9",
+		timestamp : "1787827010668",
+		key : "tp5mx6v57tn",
 
     mapWidth: "100%",
     mapHeight: "280"
