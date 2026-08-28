@@ -114,7 +114,7 @@ background-color: var(--envelope-color, #f0e6d2);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   animation: sheetSlideUp 2.3s cubic-bezier(0.25, 1, 0.5, 1) 1s forwards;
 }
 .envelope {
@@ -212,7 +212,7 @@ background-color: var(--envelope-color, #f0e6d2);
   font-weight: 300;
   color: #1a2321;
   letter-spacing: 2px;
-  margin-bottom: 15px;
+  margin-bottom: 13px;
 }
 .main-date-place {
   font-size: 0.85rem;
