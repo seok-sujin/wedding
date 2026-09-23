@@ -51,6 +51,16 @@ background-image: none !important;
   
   color: #3b2820;
 }
+
+/* 메인 콘텐츠 페이드인 효과 */
+#main-content {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#main-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* 💡 [수정] 종이 질감 오버레이를 맨 배경 뒤로 완전히 내림 */
 #main-content::before {
   content: "";
