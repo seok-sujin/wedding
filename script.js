@@ -1,9 +1,11 @@
-const WEDDING_YEAR = 2027;
-const WEDDING_MONTH = 1; // 1월
-const WEDDING_DAY = 1;
 
-const WEDDING_HOUR = 12;
-const WEDDING_MINUTE = 0;
+// 🔻날짜 기입 (현재 2027년 1월 1일 12시 30분으로 설정되어있음)
+const WEDDING_YEAR = 2027; // 년도
+const WEDDING_MONTH = 1; // 월
+const WEDDING_DAY = 1;  // 일
+
+const WEDDING_HOUR = 12; //시
+const WEDDING_MINUTE = 30;  //분
 const WEDDING_DATE = new Date(
   WEDDING_YEAR,
   WEDDING_MONTH - 1,
@@ -49,6 +51,7 @@ function openEnvelope() {
   setTimeout(function () {
     overlay.style.display = "none";
     mainContent.style.display = "block";
+    mainContent.classList.add("fade-in");
     window.scrollTo(0, 0);
     renderKakaoMap();
     if (bgm) {
@@ -82,7 +85,7 @@ function updateCountdown() {
   const secEl = document.getElementById("timer-sec");
   if (!ddayBadge || !daysEl || !hoursEl || !minEl || !secEl) return;
   if (distance < 0) {
-    ddayBadge.innerText = "D-DAY ♡ 축하해주셔서 감사합니다";
+    ddayBadge.innerText = " ♡ 축하해주셔서 감사합니다 ♡ ";
     daysEl.innerText = "00";
     hoursEl.innerText = "00";
     minEl.innerText = "00";
@@ -122,19 +125,89 @@ hoursEl.innerText = String(hours).padStart(2, "0");
 minEl.innerText = String(minutes).padStart(2, "0");
 secEl.innerText = String(seconds).padStart(2, "0");
 }
-function openModal(src) {
-  const modal = document.getElementById("image-modal");
-  const modalImg = document.getElementById("modal-img");
-  if (!modal || !modalImg) return;
-  modal.style.display = "flex";
-  modalImg.src = src;
+
+let currentIndex = 0;
+
+
+// 🔻현재 사진 9장으로 되어있음
+const galleryImages = [
+  "images/photo1.jpg",
+  "images/photo2.jpg",
+  "images/photo3.jpg",
+  "images/photo4.jpg",
+  "images/photo5.jpg",
+  "images/photo6.jpg",
+  "images/photo7.jpg",
+  "images/photo8.jpg",
+
+
+// 🔻사진 추가시 jpg" 끝에 , 찍고 복사 붙여넣기
+  "images/photo9.jpg"
+
+
+// 🔻아래에 복사 붙여넣기 하고 마지막 번호는 , 뺴기
+
+
+];
+
+function openModal(index){
+    currentIndex = index;
+
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("modal-img");
+
+    modalImg.src = galleryImages[currentIndex];
+
+  document.getElementById("modal-counter").innerText =
+  (currentIndex + 1) + " / " + galleryImages.length;
+
+    modal.style.display = "flex";
+
+  document.body.style.overflow = "hidden";
 }
 function closeModal() {
   const modal = document.getElementById("image-modal");
   if (modal) {
     modal.style.display = "none";
+
+    document.body.style.overflow = "";
   }
 }
+function changePhoto(direction) {
+    currentIndex = currentIndex + direction;
+
+    if (currentIndex < 0) {
+        currentIndex = galleryImages.length - 1;
+    }
+
+    if (currentIndex >= galleryImages.length) {
+        currentIndex = 0;
+    }
+
+    document.getElementById("modal-img").src = galleryImages[currentIndex];
+
+    document.getElementById("modal-counter").innerText =
+        (currentIndex + 1) + " / " + galleryImages.length;
+}
+
+let startX = 0;
+
+document.getElementById("modal-img").addEventListener("touchstart", function(e){
+    startX = e.touches[0].clientX;
+});
+
+document.getElementById("modal-img").addEventListener("touchend", function(e){
+    const endX = e.changedTouches[0].clientX;
+
+    if(startX - endX > 50){
+        changePhoto(1);
+    }
+
+    if(endX - startX > 50){
+        changePhoto(-1);
+    }
+});
+
 function toggleAccordion(button) {
   const content = button.nextElementSibling;
   const arrow = button.querySelector(".arrow");
@@ -162,10 +235,23 @@ function renderKakaoMap() {
   if (kakaoMapRendered) return;
   if (typeof daum === "undefined" || !daum.roughmap || !daum.roughmap.Lander) return;
   new daum.roughmap.Lander({
+
+// 🔻네비게이션 설정 : 카카오맵에서 소스생성하기 진행(현재 웨딩시그니처로 되어있음, 가이드북 참고)
     timestamp: "1781420580863",
     key: "2qxf2rzqqciv",
+
     mapWidth: "100%",
     mapHeight: "280"
   }).render();
   kakaoMapRendered = true;
 }
+
+window.addEventListener("load", function () {
+  const intro = document.getElementById("intro-overlay");
+
+  if (intro) {
+    setTimeout(function () {
+      intro.classList.remove("loading");
+    }, 300);
+  }
+});
