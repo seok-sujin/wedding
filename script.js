@@ -243,8 +243,8 @@ function renderKakaoMap() {
   new daum.roughmap.Lander({
 
 // 🔻네비게이션 설정 : 카카오맵에서 소스생성하기 진행(현재 웨딩시그니처로 되어있음, 가이드북 참고)
-    timestamp: "1781420580863",
-    key: "2qxf2rzqqciv",
+timestamp : "1790147557441",
+      key : "v85mbx3y2ne",
 
     mapWidth: "100%",
     mapHeight: "280"
