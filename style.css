@@ -51,15 +51,9 @@ background-image: none !important;
     color: #e2d7cd;
 }
 
-/* 내부 각 섹션 배경을 투명하게 만들어 편지지 질감이 보이도록 설정 */
-.main-cover, 
-.countdown-timer-section, 
-.content-section,
-.gallery-section,
-.wedding-footer {
-    background-color:#F7F4EF; !important;\
+.main-cover, .countdown-timer-section, .content-section, .gallery-section, .wedding-footer {
+  background-color: #F7F4EF !important;
 }
-
 
 /* 폰트 */
 .section-title,
