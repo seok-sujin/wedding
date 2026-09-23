@@ -262,3 +262,8 @@ window.addEventListener("load", function () {
     }, 300);
   }
 });
+
+// ================= Supabase DB 연동 =================
+const SUPABASE_URL = 'https://afqlaropaguqopfuxcws.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_uWOLpctq1a3M4elXZa-5Aw_Yuim-LUA'; // 방금 복사한 Publishable key 붙여넣기
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
