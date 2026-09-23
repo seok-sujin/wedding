@@ -165,7 +165,7 @@ function changeImage(direction) {
 
 // ================= 4. Supabase 방명록 연동 =================
 const SUPABASE_URL = 'https://afqlaropaguqopfuxcws.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // 본인의 Supabase Anon Key를 넣어주세요.
+const SUPABASE_ANON_KEY = 'sb_publishable_uWOLpctq1a3M4elXZa-5Aw_Yuim-LUA'; // 본인의 Supabase Anon Key를 넣어주세요.
 
 let supabaseClient = null;
 if (typeof supabase !== 'undefined' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY') {
