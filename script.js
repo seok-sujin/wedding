@@ -1,4 +1,24 @@
+// 인트로 봉투 열기 및 메인 화면 전환 함수
+function openEnvelope() {
+  const intro = document.getElementById('intro-overlay');
+  const mainContent = document.getElementById('main-content');
+  
+  if (intro) {
+    // 1. 인트로 봉투 열림 효과 적용 (CSS 애니메이션 동작)
+    intro.classList.add('open');
+    
+    // 2. 메인 콘텐츠 서서히 나타나기
+    if (mainContent) {
+      mainContent.style.display = 'block';
+      mainContent.classList.add('fade-in');
+    }
 
+    // 3. 0.8초 후 인트로 레이어를 화면에서 완전히 제거
+    setTimeout(() => {
+      intro.style.display = 'none';
+    }, 800);
+  }
+}
 // 🔻날짜 기입 (현재 2027년 1월 1일 12시 30분으로 설정되어있음)
 const WEDDING_YEAR = 2026; // 년도
 const WEDDING_MONTH = 11; // 월
@@ -142,14 +162,13 @@ const galleryImages = [
 
 
 // 🔻사진 추가시 jpg" 끝에 , 찍고 복사 붙여넣기
-  "images/photo9.jpg"
-   "images/photo10.jpg"
- "images/photo11.jpg"
- "images/photo12.jpg"
- "images/photo13.jpg"
- "images/photo14.jpg"
- "images/photo15.jpg"
-
+  "images/photo9.jpg",
+    "images/photo10.jpg",
+    "images/photo11.jpg",
+	"images/photo12.jpg",
+	"images/photo13.jpg",
+	"images/photo14.jpg",
+	"images/photo15.jpg"
 
 // 🔻아래에 복사 붙여넣기 하고 마지막 번호는 , 뺴기
 
@@ -243,8 +262,10 @@ function renderKakaoMap() {
   new daum.roughmap.Lander({
 
 // 🔻네비게이션 설정 : 카카오맵에서 소스생성하기 진행(현재 웨딩시그니처로 되어있음, 가이드북 참고)
-timestamp : "1790147557441",
-      key : "v85mbx3y2ne",
+
+
+		timestamp : "1787827010668",
+		key : "tp5mx6v57tn",
 
     mapWidth: "100%",
     mapHeight: "280"
@@ -262,100 +283,7 @@ window.addEventListener("load", function () {
   }
 });
 
-// 1. Supabase 클라이언트 초기화 (본인의 URL과 ANON KEY 입력)
-const SUPABASE_URL = 'https://your-project.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_uWOLpctq1a3M4elXZa-5Aw_Yuim-LUA';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('guestbook-form');
-  const listContainer = document.getElementById('guestbook-list');
-
-  // 방명록 목록 불러오기
-  async function fetchGuestbook() {
-    listContainer.innerHTML = '<p style="text-align:center; color:#888;">로딩 중...</p>';
-
-    const { data, error } = await supabase
-      .from('guestbook')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('방명록 불러오기 실패:', error);
-      listContainer.innerHTML = '<p style="text-align:center; color:#888;">메시지를 불러오지 못했습니다.</p>';
-      return;
-    }
-
-    renderGuestbook(data);
-  }
-
-  // 방명록 화면에 렌더링
-  function renderGuestbook(messages) {
-    if (!messages || messages.length === 0) {
-      listContainer.innerHTML = '<p style="text-align:center; color:#888; padding:20px;">첫 축하 메시지를 남겨주세요!</p>';
-      return;
-    }
-
-    listContainer.innerHTML = messages.map(item => {
-      const date = new Date(item.created_at).toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-      });
-
-      return `
-        <div class="guestbook-card" data-id="${item.id}">
-          <div class="card-header">
-            <span class="card-author">${escapeHtml(item.name)}</span>
-            <span class="card-date">${date}</span>
-          </div>
-          <div class="card-text">${escapeHtml(item.message)}</div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  // 새 방명록 작성 제출
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const nameInput = document.getElementById('gb-name');
-    const passwordInput = document.getElementById('gb-password');
-    const messageInput = document.getElementById('gb-message');
-
-    const name = nameInput.value.trim();
-    const password = passwordInput.value.trim();
-    const message = messageInput.value.trim();
-
-    if (!name || !message) {
-      alert('이름과 메시지를 입력해 주세요.');
-      return;
-    }
-
-    const { error } = await supabase
-      .from('guestbook')
-      .insert([{ name, password, message }]);
-
-    if (error) {
-      alert('등록 중 오류가 발생했습니다.');
-      console.error(error);
-    } else {
-      alert('축하 메시지가 등록되었습니다!');
-      form.reset();
-      fetchGuestbook(); // 목록 새로고침
-    }
-  });
-
-  // XSS 방지용 HTML 이스케이프 함수
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
-  // 초기 로드 시 목록 불러오기
-  fetchGuestbook();
-});
+// ================= Supabase DB 연동 =================
+const SUPABASE_URL = 'https://afqlaropaguqopfuxcws.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_uWOLpctq1a3M4elXZa-5Aw_Yuim-LUA'; // 방금 복사한 Publishable key 붙여넣기
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
