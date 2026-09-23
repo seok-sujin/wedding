@@ -164,14 +164,57 @@
       <div id="guestbook-list" class="guestbook-list"></div>
     </section>
 
-    <!-- 오시는 길 섹션 -->
+
+    <!-- 마음 전하실 곳 섹션 (추가) -->
+    <section class="content-section account-section">
+      <span class="section-sub">ACCOUNT</span>
+      <h2 class="section-title">마음 전하실 곳</h2>
+      <p class="section-desc">축하의 마음을 담아 축의금을 전달하실 수 있습니다.</p>
+
+      <!-- 신랑측 계좌 -->
+      <div class="account-box">
+        <div class="account-header">
+          <span>신랑측 계좌번호</span>
+        </div>
+        <div class="account-info">
+          <p><b>국민은행</b> 123456-04-123456</p>
+          <p class="account-holder">예금주: 석수진</p>
+          <button class="copy-btn" onclick="copyAccount('12345604123456')">계좌번호 복사</button>
+        </div>
+      </div>
+
+      <!-- 신부측 계좌 -->
+      <div class="account-box">
+        <div class="account-header">
+          <span>신부측 계좌번호</span>
+        </div>
+        <div class="account-info">
+          <p><b>농협은행</b> 302-1234-5678-91</p>
+          <p class="account-holder">예금주: 홍길동</p>
+          <button class="copy-btn" onclick="copyAccount('3021234567891')">계좌번호 복사</button>
+        </div>
+      </div>
+    </section>
+    
+  <!-- 오시는 길 섹션 -->
     <section class="content-section location-section">
       <span class="section-sub">LOCATION</span>
       <h2 class="section-title">오시는 길</h2>
+      
+      <!-- 카카오 약도 영역 -->
       <div class="map-area">
         <div id="daumRoughmapContainer1787827010668" class="root_daum_roughmap root_daum_roughmap_landing"></div>
-        <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
       </div>
+      <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+      <script charset="UTF-8">
+        new daum.roughmap.Lander({
+          "timestamp" : "1787827010668",
+          "key" : "2mvu9",
+          "mapWidth" : "340",
+          "mapHeight" : "240"
+        }).render();
+      </script>
+
       <div class="location-details">
         <h3 class="hall-name">홀리데이 인 광주 별관</h3>
         <div class="transport-info">
@@ -180,6 +223,7 @@
           <p><b>주 차</b> 호텔 내 지상,지하 주차장 이용 가능 <br> 만차시 김대중컨벤션센터 야외주차장을 이용해주세요</p>
         </div>
       </div>
+
       <div class="map-buttons">
         <a href="https://place.map.kakao.com/17180479?fromAppLink=true" target="_blank" class="map-btn kakao">카카오맵</a>
         <a href="https://naver.me/5ajPuwxk" target="_blank" class="map-btn naver">네이버지도</a>
@@ -204,5 +248,7 @@
   </div>
 
   <script src="script.js"></script>
+  <!-- 카카오톡 공유 SDK -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </body>
 </html>
