@@ -1,569 +1,634 @@
-/* ================= 모바일 청첩장 통합 스타일Sheet ================= */
-/* ================= 1. 기본 초기화 및 폰트 ================= */
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-
+* ================
+   🌿 모바일 청첩장
+================ */
+/* 기본 설정 */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-
+html,
 body {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-  background-color: #f7f5f0;
-  color: #3b2820;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.mobile-container {
   width: 100%;
-  max-width: 430px;
-  background-color: #ffffff;
-  min-height: 100vh;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  position: relative;
-  overflow: hidden;
-  text-align: center;
+  min-height: 100%;
+  background-color: #4b1f24;
+  color: #e2e8f0;
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
-
-/* ================= 2. 인트로 오버레이 (봉투 & 편지 디자인 복구) ================= */
-#intro-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #f7f5f0;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-
-.envelope-wrapper {
-  position: relative;
-  width: 300px;
-  height: 380px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* 편지 봉투 몸통 */
-.envelope {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: #e2d3c5;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* 봉투 덮개 삼각형 삼각선 */
-.envelope::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-  border-top: 130px solid #d4c1b0;
-  z-index: 3;
-}
-
-/* 편지지 카드 */
-.letter-sheet {
-  position: absolute;
-  width: 86%;
-  height: 88%;
-  background-color: #ffffff;
-  border-radius: 6px;
-  padding: 20px 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  border: 1px solid #ebdcd0;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.letter-sheet .card-photos img {
-  width: 100%;
-  max-width: 180px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-}
-
-.letter-sheet .card-names {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #3b2820;
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-}
-
-.letter-sheet .card-bottom {
-  font-size: 0.75rem;
-  color: #8c6a5a;
-  line-height: 1.4;
-}
-
-/* 터치 안내 문구 */
-.click-notice {
-  margin-top: 25px;
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-  color: #8c6a5a;
-  font-weight: 600;
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-8px); }
-  60% { transform: translateY(-4px); }
-}
-
-#intro-overlay.open {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
+/* 처음에는 봉투만 보이게 */
 #main-content {
   display: none;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-
-#main-content.fade-in {
-  opacity: 1;
-}
-
-/* ================= 3. BGM 토글 버튼 ================= */
-.bgm-container {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 100;
-}
-
-.bgm-btn {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid #d4c7bc;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  color: #5a483e;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-/* ================= 4. 메인 커버 섹션 ================= */
-.hero-section {
-  padding: 60px 20px 40px 20px;
-  background-color: #fcfbf9;
-}
-
-.wedding-title {
-  font-size: 0.8rem;
-  letter-spacing: 4px;
-  color: #8c6a5a;
-  margin-bottom: 20px;
-}
-
-.main-img-box {
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto 25px auto;
-  border-radius: 160px 160px 0 0;
+  max-width: 420px;
+  width: calc(100% - 32px);
+  margin: 40px auto;
+  background-color: #ffffff;
+  color: #333333;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  position: relative;
+  z-index: 5;
 }
-
-.main-img-box img {
+/* 폰트 */
+.section-title,
+.section-sub,
+.wedding-title,
+.main-names,
+.calendar-month,
+.dday-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 400;
+  letter-spacing: 1.25px;
+}
+.invitation-text {
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 400;
+  line-height: 2.2;
+  color: #4a4740;
+}
+/* =================
+   1. 인트로 봉투
+================= */
+#intro-overlay {
+  position: fixed;
+  inset: 0;
   width: 100%;
-  display: block;
-}
-
-.names {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #3b2820;
-  margin-bottom: 10px;
-}
-
-.wedding-info {
-  font-size: 0.85rem;
-  color: #736156;
-  line-height: 1.6;
-}
-
-/* ================= 5. 공통 섹션 스타일 ================= */
-.content-section {
-  padding: 50px 20px;
-  border-bottom: 1px solid #f2ede8;
-}
-
-.section-sub {
-  display: block;
-  font-size: 0.7rem;
-  letter-spacing: 3px;
-  color: #a68d80;
-  margin-bottom: 6px;
-}
-
-.section-title {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #3b2820;
-  margin-bottom: 25px;
-}
-
-.section-desc {
-  font-size: 0.85rem;
-  color: #736156;
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-
-/* ================= 6. 모시는 글 & 혼주 연락처 ================= */
-.greeting-text {
-  font-size: 0.88rem;
-  line-height: 2;
-  color: #4a382f;
-  margin-bottom: 35px;
-}
-
-.family-info {
-  font-size: 0.9rem;
-  line-height: 2;
-  color: #3b2820;
-  margin-bottom: 25px;
-}
-
-.contact-box {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.call-btn {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #f4eee8;
-  color: #8c6a5a;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-/* ================= 7. 달력 & D-day 카운트다운 ================= */
-.calendar-box {
-  max-width: 300px;
-  margin: 0 auto 30px auto;
-}
-
-.calendar-month {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #5a483e;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-  font-size: 0.8rem;
-  text-align: center;
-}
-
-.calendar-grid span {
+  height: 100%;
+  background-color: #4b1f24;
+  z-index: 10000;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 32px;
 }
-
-.calendar-header {
-  font-weight: 600;
-  color: #8c6a5a;
-}
-
-.wedding-day {
-  background-color: #8c6a5a;
-  color: #ffffff;
-  border-radius: 50%;
-  font-weight: 600;
-}
-
-.dday-badge {
-  display: inline-block;
-  background-color: #f4eee8;
-  color: #8c6a5a;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.timer-grid {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.timer-item {
+.envelope-wrapper {
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: envelopeFadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
-
-.timer-item .num {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #3b2820;
+.envelope {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  background-color: #e6ddd1;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
-
-.timer-item .label {
-  font-size: 0.65rem;
-  color: #a68d80;
-  margin-top: 2px;
+.envelope .letter-sheet {
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  top: 15px;
+  height: 160px;
+  background: #fffdf8;
+  border-radius: 4px;
+  z-index: 2;
+  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  animation: sheetSlideUp 1.6s cubic-bezier(0.25, 1, 0.5, 1) 0.4s forwards;
 }
-
-/* ================= 8. 갤러리 섹션 & 모달 ================= */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  max-width: 360px;
-  margin: 0 auto;
+.envelope::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  height: 120px;
+  background: #d8cdbf;
+  clip-path: polygon(0 0, 50% 40%, 100% 0, 100% 100%, 0 100%);
+  border-top: 1px solid #e2e8f0;
+  border-radius: 0 0 4px 4px;
+  z-index: 4;
 }
-
-.gallery-item {
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 6px;
+.envelope-name {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #7b3f43;
+  letter-spacing: 1.5px;
+  opacity: 0;
+  animation: textFadeIn 1.2s ease forwards 0.8s;
+}
+.envelope-date {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #64748b;
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: textFadeIn 1.2s ease forwards 1s;
+}
+.envelope-sub {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: textFadeIn 1.2s ease forwards 1.2s;
+}
+.click-notice {
+  position: relative;
+  margin-top: 35px;
+  font-size: 0.9rem;
+  color: #d7b67a;
+  letter-spacing: 3px;
+  opacity: 0;
+  animation: noticeFadeIn 1s ease forwards 1.8s, noticeBounce 2s ease-in-out infinite;
+}
+/* =================
+   2. 메인 커버
+================= */
+#top-sticky-bar {
+  width: 100%;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: flex-end;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+#bgm-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e0dcd3;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  color: #615e56;
   cursor: pointer;
+  backdrop-filter: blur(4px);
 }
-
+.main-cover {
+  background-color: #ffffff;
+  padding: 40px 24px 60px;
+  text-align: center;
+  border-bottom: 1px solid #eeebe3;
+}
+.cover-text {
+  margin-bottom: 40px;
+}
+.wedding-title {
+  font-size: 0.75rem;
+  letter-spacing: 5px;
+  color: #b8935d;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.main-names {
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: #1a2321;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+.main-date-place {
+  font-size: 0.85rem;
+  color: #706b5f;
+  letter-spacing: 0.5px;
+}
+.main-photo-area {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  background-color: #eceae4;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.main-photo-area img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+/* =================
+   3. 공통 섹션
+================= */
+.content-section {
+  width: 100%;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid #eeebe3;
+}
+.section-sub {
+  font-size: 0.75rem;
+  letter-spacing: 3.5px;
+  color: #8c826e;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: 1.25rem;
+  color: #b8935d;
+  letter-spacing: 1px;
+}
+/* =================
+   4. D-DAY 타이머
+================= */
+.countdown-timer-section {
+  width: 100%;
+  padding: 50px 24px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid #eeebe3;
+}
+.dday-title {
+  font-size: 0.85rem;
+  color: #b8935d;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.dday-badge {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1a2321;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+.timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+}
+.time-box {
+  flex: 1;
+  background-color: #f7f6f2;
+  border-radius: 6px;
+  padding: 12px 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+.time-box span {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #3b3934;
+  font-variant-numeric: tabular-nums;
+}
+.time-box label {
+  font-size: 0.6rem;
+  color: #a19c91;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+.time-divider {
+  font-size: 1.1rem;
+  color: #c4beb3;
+  padding-bottom: 14px;
+  font-weight: 300;
+}
+/* =================
+   5. 초대글
+================= */
+.flower-deco {
+  font-size: 1.2rem;
+  margin: 25px 0;
+}
+.invitation-text {
+  font-size: 0.9rem;
+}
+.family-relations {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 280px;
+  border-top: 1px solid #e8e5dd;
+  padding-top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #59554c;
+}
+.name-highlight {
+  font-weight: 500;
+  color: #1a2321;
+  margin-left: 4px;
+}
+/* =================
+   6. 달력
+================= */
+.calendar-section {
+  background-color: #f5f3ee;
+}
+.calendar-month {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #1a2321;
+  margin-bottom: 30px;
+}
+.mini-calendar {
+  width: 100%;
+  max-width: 300px;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 14.28%);
+  row-gap: 15px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+.headers {
+  font-weight: 500;
+  color: #706b5f;
+  border-bottom: 1px solid #e0dcd5;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+.headers span:first-child,
+.days span:nth-child(7n+1) {
+  color: #b85c5c;
+}
+.days span {
+  color: #4f4c44;
+  padding: 4px 0;
+  display: inline-block;
+}
+.days .wedding-day {
+  position: relative;
+  color: #8a6660;
+  font-weight: 700;
+  background-color: transparent;
+  z-index: 1;
+}
+.days .wedding-day::before {
+  content: "♥";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3.25rem;
+  z-index: -1;
+  color: #b04a54;
+  opacity: 0.45;
+}
+.countdown-text {
+  margin-top: 35px;
+  font-size: 0.8rem;
+  color: #7d776a;
+}
+/* =================
+   7. 갤러리
+================= */
+.gallery-container {
+  width: 100%;
+  margin-top: 35px;
+  columns: 3;
+  column-gap: 8px;
+}
+.gallery-item {
+  width: 100%;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  break-inside: avoid;
+}
 .gallery-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  display: block;
   transition: transform 0.3s ease;
 }
-
-.gallery-item:hover img {
+.gallery-item img:hover {
   transform: scale(1.05);
 }
-
+.gallery-notice {
+  margin-top: 20px;
+  font-size: 0.75rem;
+  color: #9c978e;
+}
+/* 갤러리 확대 팝업 */
 .modal {
   display: none;
   position: fixed;
-  z-index: 10000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
-
 .modal-content {
   max-width: 90%;
-  max-height: 80vh;
+  max-height: 85%;
+  object-fit: contain;
   border-radius: 8px;
+  animation: zoomIn 0.3s ease;
 }
-
-.close-modal {
+.modal-close {
   position: absolute;
   top: 20px;
   right: 25px;
   color: #ffffff;
-  font-size: 35px;
+  font-size: 40px;
+  font-weight: bold;
   cursor: pointer;
 }
-
-.modal-prev, .modal-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-  padding: 10px;
-  user-select: none;
-}
-
-.modal-prev { left: 10px; }
-.modal-next { right: 10px; }
-
-.modal-counter {
-  color: #ffffff;
-  margin-top: 15px;
-  font-size: 0.85rem;
-}
-
-/* ================= 9. 오시는 길 & 카카오 지도 ================= */
-.location-section {
-  padding: 60px 24px;
-}
-
+/* =================
+   8. 오시는 길
+================= */
 .map-area {
   width: 100%;
-  max-width: 340px;
-  margin: 25px auto 20px auto;
-  border-radius: 12px;
+  min-height: 280px;
+  margin-top: 35px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(59, 40, 32, 0.1);
 }
-
 .root_daum_roughmap {
   width: 100% !important;
   border: none !important;
+  font-family: inherit !important;
 }
-
 .root_daum_roughmap .wrap_map {
-  height: 240px !important;
+  border: none !important;
 }
-
 .location-details {
   width: 100%;
-  max-width: 340px;
-  margin: 0 auto;
   text-align: left;
+  margin-top: 30px;
 }
-
 .hall-name {
-  font-size: 1.1rem;
-  color: #3b2820;
-  font-weight: 600;
-  margin-bottom: 15px;
-  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #1a2321;
+  margin-bottom: 8px;
 }
-
 .transport-info {
+  border-top: 1px solid #e8e5dd;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   font-size: 0.85rem;
-  color: #4a382f;
-  line-height: 1.8;
+  color: #4a4740;
 }
-
-.transport-info p {
-  margin-bottom: 10px;
-}
-
 .transport-info b {
-  color: #8c6a5a;
+  color: #1a2321;
   display: inline-block;
-  width: 55px;
+  width: 50px;
 }
-
+.transport-indent {
+  display: inline-block;
+  padding-left: 54px;
+}
 .map-buttons {
   display: flex;
-  justify-content: center;
-  gap: 8px;
   width: 100%;
-  max-width: 340px;
-  margin: 20px auto 0 auto;
+  gap: 8px;
+  margin-top: 35px;
 }
-
 .map-btn {
   flex: 1;
-  padding: 10px 0;
-  border-radius: 8px;
+  padding: 12px 0;
   font-size: 0.8rem;
   font-weight: 500;
   text-decoration: none;
-  text-align: center;
-  color: #ffffff !important;
-  transition: opacity 0.2s ease;
-}
-
-.map-btn:hover {
-  opacity: 0.85;
-}
-
-.map-btn.kakao { background-color: #FEE500; color: #191919 !important; }
-.map-btn.naver { background-color: #03CF5D; }
-.map-btn.tmap { background-color: #1158C7; }
-
-/* ================= 10. 마음 전하실 곳 (계좌 안내) ================= */
-.account-box {
-  background: #fdfbf7;
-  border: 1px solid #e2dcd5;
-  border-radius: 12px;
-  max-width: 340px;
-  margin: 15px auto;
-  overflow: hidden;
-  text-align: left;
-}
-
-.account-header {
-  background: #f4eee8;
-  padding: 12px 18px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #3b2820;
-}
-
-.account-info {
-  padding: 15px 18px;
-  font-size: 0.85rem;
-  color: #5a483e;
-}
-
-.account-holder {
-  font-size: 0.8rem;
-  color: #888;
-  margin-top: 4px;
-}
-
-.copy-btn {
-  display: block;
-  width: 100%;
-  margin-top: 12px;
-  padding: 8px 0;
-  background-color: #8c6a5a;
+  border-radius: 4px;
   color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.map-btn.kakao {
+  background-color: #fee500;
+  color: #191919;
+}
+.map-btn.naver {
+  background-color: #03c75a;
+}
+.map-btn.tmap {
+  background-color: #222222;
+}
+/* =================
+   9. 마음 전하실 곳
+================= */
+.account-section {
+  border-bottom: none;
+}
+.account-intro {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #706b5f;
+  margin-top: 15px;
+  margin-bottom: 35px;
+}
+.accordion-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.accordion-header {
+  width: 100%;
+  padding: 16px 20px;
+  background-color: #f5f3ee;
+  border: 1px solid #e8e5dd;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #3b3934;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s ease;
 }
-
+.accordion-header:hover {
+  background-color: #edebe4;
+}
+.accordion-header.active {
+  background-color: #eceae4;
+  font-weight: 500;
+}
+.accordion-header .arrow {
+  font-size: 0.75rem;
+  color: #8c8576;
+}
+.accordion-content {
+  display: none;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e8e5dd;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  margin-top: -13px;
+  padding: 8px 20px;
+}
+.account-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  font-size: 0.85rem;
+  text-align: left;
+  line-height: 1.5;
+  color: #4a4740;
+}
+.account-row:not(:last-child) {
+  border-bottom: 1px solid #f5f3ee;
+}
+.copy-btn {
+  background-color: #ffffff;
+  border: 1px solid #c9c3b4;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #5e5a50;
+  cursor: pointer;
+}
 .copy-btn:hover {
-  background-color: #6e5042;
+  background-color: #f5f3ee;
 }
 
-/* ================= 11. 방명록 섹션 ================= */
+
+
+/* =================
+   10. 푸터
+================= */
+.wedding-footer {
+  width: 100%;
+  display: block;
+  background-color: #5a262c;
+  color: #f4e8d8;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: -2px;
+  padding: 30px 20px 35px;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.wedding-footer p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   11. 방명록 섹션 (모바일 입력 폼 & 카드 리스트 디자인 최적화)
+   ========================================================================== */
+.guestbook-section {
+  padding: 50px 20px;
+}
+
 .guestbook-form {
   max-width: 340px;
   margin: 0 auto 25px auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .form-row {
@@ -573,12 +638,22 @@ body {
 
 .guestbook-form input,
 .guestbook-form textarea {
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
   border: 1px solid #e2dcd5;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 0.85rem;
   font-family: inherit;
+  background-color: #fdfbf9;
+  color: #2d1f18;
   outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.guestbook-form input:focus,
+.guestbook-form textarea:focus {
+  border-color: #4a3525; /* 포커스 시 진한 브라운 테두리 */
+  background-color: #ffffff;
 }
 
 .guestbook-form input {
@@ -586,18 +661,24 @@ body {
 }
 
 .guestbook-form textarea {
-  height: 70px;
+  height: 80px;
   resize: none;
 }
 
 .submit-btn {
-  padding: 10px;
-  background-color: #8c6a5a;
-  color: white;
+  padding: 12px;
+  background-color: #4a3525; /* 진한 브라운 버튼 */
+  color: #ffffff;
   border: none;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: #35251a;
 }
 
 .guestbook-list {
@@ -611,53 +692,89 @@ body {
 
 .guestbook-card {
   background-color: #fdfbf7;
-  border: 1px solid #f0e9e2;
-  padding: 12px 15px;
-  border-radius: 8px;
+  border: 1px solid #efe8e1;
+  padding: 14px 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 6px;
+  align-items: center;
+  margin-bottom: 8px;
   font-size: 0.8rem;
 }
 
 .card-author {
   font-weight: 600;
-  color: #3b2820;
+  color: #2d1f18;
 }
 
 .card-date {
   color: #a68d80;
+  font-size: 0.75rem;
 }
 
 .card-text {
   font-size: 0.85rem;
   color: #5a483e;
-  line-height: 1.5;
+  line-height: 1.55;
   white-space: pre-wrap;
+  word-break: break-all; /* 모바일에서 글자가 길어져도 영역 밖으로 넘치지 않도록 방지 */
 }
-
-/* ================= 12. 하단 푸터 & 공유 버튼 ================= */
-.footer-section {
-  padding: 40px 20px;
-  background-color: #fcfbf9;
+/* =================
+   애니메이션
+================= */
+@keyframes envelopeFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
-.share-btn {
-  padding: 10px 20px;
-  background-color: #FEE500;
-  color: #191919;
-  border: none;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 20px;
+@keyframes sheetSlideUp {
+  from {
+    top: 15px;
+  }
+  to {
+    top: -75px;
+  }
 }
-
-.copyright {
-  font-size: 0.75rem;
-  color: #a68d80;
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes noticeFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes noticeBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
