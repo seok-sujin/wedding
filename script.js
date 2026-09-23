@@ -1,11 +1,22 @@
-// 인트로 봉투 열기 함수
+// 인트로 봉투 열기 및 메인 화면 전환 함수
 function openEnvelope() {
   const intro = document.getElementById('intro-overlay');
+  const mainContent = document.getElementById('main-content');
+  
   if (intro) {
+    // 1. 인트로 봉투 열림 효과 적용 (CSS 애니메이션 동작)
     intro.classList.add('open');
+    
+    // 2. 메인 콘텐츠 서서히 나타나기
+    if (mainContent) {
+      mainContent.style.display = 'block';
+      mainContent.classList.add('fade-in');
+    }
+
+    // 3. 0.8초 후 인트로 레이어를 화면에서 완전히 제거
     setTimeout(() => {
       intro.style.display = 'none';
-    }, 1000);
+    }, 800);
   }
 }
 // 🔻날짜 기입 (현재 2027년 1월 1일 12시 30분으로 설정되어있음)
