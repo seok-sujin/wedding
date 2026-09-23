@@ -173,7 +173,36 @@ photo번호, 갤러리번호, openModal(번호) 총 3개를 꼭 변경해주세�
 <!-- 🔻아래에 연결해서 붙여넣기 해주세요 -->
 
             </div>
+      
         </section>
+    <!-- 게스트북(방명록) 섹션 -->
+<section class="content-section guestbook-section">
+  <span class="section-sub">Guestbook</span>
+  <h2 class="section-title">축하의 한마디</h2>
+
+  <!-- 방명록 작성 폼 -->
+  <form id="guestbook-form" class="guestbook-form">
+    <div class="input-row">
+      <input type="text" id="guest-name" placeholder="성함" required maxlength="10">
+      <input type="password" id="guest-pw" placeholder="비밀번호" required maxlength="10">
+    </div>
+    <textarea id="guest-message" placeholder="축하의 마음을 남겨주세요 :)" required maxlength="200"></textarea>
+    <button type="submit" class="submit-btn">축하글 남기기</button>
+  </form>
+
+  <!-- 작성된 방명록 목록이 출력되는 영역 -->
+  <div id="guestbook-list" class="guestbook-list">
+    <!-- 자바스크립트로 남겨진 방명록 카드들이 여기에 추가됩니다 -->
+    <div class="guestbook-card">
+      <div class="card-header">
+        <span class="card-author">김신랑</span>
+        <span class="card-date">2026.11.28</span>
+      </div>
+      <p class="card-text">결혼을 진심으로 축하드립니다! 행복하게 잘 살아라~</p>
+    </div>
+  </div>
+</section>
+    
     <section class="content-section location-section">
       <span class="section-sub">LOCATION</span>
       <h2 class="section-title">오시는 길</h2>
