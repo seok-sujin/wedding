@@ -39,8 +39,6 @@ body {
     
     /* [수정] 흰색(#ffffff) 대신 따뜻한 베이지/종이 배경색 적용 */
     background-color: #F5EFEB; 
-    /* 질감 배경을 본문 카드에도 적용하려면 아래 주석 해제 */
-    background-image: url('images/bg_texture.jpg');
     
     color: #4A3B32; /* 기본 글자색도 다크 브라운으로 변경 */
     border-radius: 12px;
@@ -938,9 +936,9 @@ body,
   background-color: #F5EFEB;
    /* 질감 이미지를 사용할 경우 아래 주석을 해제하세요 */
   background-image: url('images/bg_texture.jpg'); 
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed; 
+background-size: auto; 
+    background-repeat: repeat; 
+    background-position: top left;
 }
 
 .envelope-name {
