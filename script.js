@@ -255,3 +255,101 @@ window.addEventListener("load", function () {
     }, 300);
   }
 });
+
+// 1. Supabase 클라이언트 초기화 (본인의 URL과 ANON KEY 입력)
+const SUPABASE_URL = 'https://your-project.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_uWOLpctq1a3M4elXZa-5Aw_Yuim-LUA';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('guestbook-form');
+  const listContainer = document.getElementById('guestbook-list');
+
+  // 방명록 목록 불러오기
+  async function fetchGuestbook() {
+    listContainer.innerHTML = '<p style="text-align:center; color:#888;">로딩 중...</p>';
+
+    const { data, error } = await supabase
+      .from('guestbook')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('방명록 불러오기 실패:', error);
+      listContainer.innerHTML = '<p style="text-align:center; color:#888;">메시지를 불러오지 못했습니다.</p>';
+      return;
+    }
+
+    renderGuestbook(data);
+  }
+
+  // 방명록 화면에 렌더링
+  function renderGuestbook(messages) {
+    if (!messages || messages.length === 0) {
+      listContainer.innerHTML = '<p style="text-align:center; color:#888; padding:20px;">첫 축하 메시지를 남겨주세요!</p>';
+      return;
+    }
+
+    listContainer.innerHTML = messages.map(item => {
+      const date = new Date(item.created_at).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+
+      return `
+        <div class="guestbook-card" data-id="${item.id}">
+          <div class="card-header">
+            <span class="card-author">${escapeHtml(item.name)}</span>
+            <span class="card-date">${date}</span>
+          </div>
+          <div class="card-text">${escapeHtml(item.message)}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // 새 방명록 작성 제출
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nameInput = document.getElementById('gb-name');
+    const passwordInput = document.getElementById('gb-password');
+    const messageInput = document.getElementById('gb-message');
+
+    const name = nameInput.value.trim();
+    const password = passwordInput.value.trim();
+    const message = messageInput.value.trim();
+
+    if (!name || !message) {
+      alert('이름과 메시지를 입력해 주세요.');
+      return;
+    }
+
+    const { error } = await supabase
+      .from('guestbook')
+      .insert([{ name, password, message }]);
+
+    if (error) {
+      alert('등록 중 오류가 발생했습니다.');
+      console.error(error);
+    } else {
+      alert('축하 메시지가 등록되었습니다!');
+      form.reset();
+      fetchGuestbook(); // 목록 새로고침
+    }
+  });
+
+  // XSS 방지용 HTML 이스케이프 함수
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // 초기 로드 시 목록 불러오기
+  fetchGuestbook();
+});
