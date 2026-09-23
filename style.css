@@ -1152,8 +1152,34 @@ body::before {
 
 /* 3. 인트로 오버레이 배경색 */
 #intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: #3b2820;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 10000;
+  cursor: pointer;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* 클릭/터치 시 인트로 사라지는 클래스 (핵심) */
+#intro-overlay.open {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+/* 로딩 전 오버레이 숨김 처리 */
+#intro-overlay.loading .envelope-wrapper {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#intro-overlay:not(.loading) .envelope-wrapper {
+  opacity: 1;
 }
 
 .envelope-name {
