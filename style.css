@@ -1055,3 +1055,15 @@ body::before {
   background-color: #3b2820;
   color: #fff8f6;
 }
+
+/* 기기 다크모드 설정에 상관없이 색상 고정하기 */
+:root {
+  color-scheme: light only; /* 브라우저에 강제 다크모드 적용 방지 */
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #F7F4EF !important; /* 원하시는 베이지톤 배경색 유지 */
+    color: #4d4340 !important; /* 텍스트 색상도 고정 */
+  }
+}
