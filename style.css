@@ -179,29 +179,32 @@ body {
   padding: 15px 20px;
   display: flex;
   justify-content: flex-end;
-  position: sticky;
+  position: absolute; /* 스크롤 전에는 사진 위에 완전히 겹치도록 설정 */
   top: 0;
+  left: 0;
   z-index: 10;
-  background-color: transparent; /* 메인 커버 사진과 이어지도록 투명 처리 */
+  background-color: transparent !important; /* [핵심] 상단 하얀 띠 제거 */
 }
+
 #bgm-btn {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(59, 40, 32, 0.08); /* 딥 브라운 톤의 은은한 반투명 버튼 */
+  border: 1px solid rgba(59, 40, 32, 0.2);
   padding: 6px 14px;
   border-radius: 30px;
   font-size: 0.75rem;
-  color: #f3ece4; /* 크림 베이지 텍스트 */
+  color: #3b2820; /* 딥 브라운 글자 */
   cursor: pointer;
   backdrop-filter: blur(4px);
-  transition: all 0.3s ease;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
+
 .main-cover {
   width: 100%;
-  height: 100vh; /* 화면 전체 채움 */
+  height: 85vh;
+  min-height: 520px;
+  max-height: 680px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 텍스트 상단 배치 */
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
   padding: 0;
@@ -209,39 +212,42 @@ body {
   overflow: hidden;
   background-color: transparent;
 }
+
 .cover-text {
   position: relative;
   z-index: 3;
   width: 100%;
   text-align: center;
-  margin-top: 20px; /* 상단 스티키바 아래로 적절한 간격 고정 */
+  margin-top: 60px; /* 상단 스티키 바 버튼과 겹치지 않게 여백 부여 */
   padding: 0 20px;
 }
 
+/* 🎨 글자 색상 추천: 고급스러운 '딥 다크 브라운' (#2c1d17) */
 .wedding-title {
   font-size: 0.75rem;
   letter-spacing: 5px;
-  color: #cbb8a9; /* 따뜻한 샌드 베이지 */
+  color: #8c6a5a; /* 서브 타이틀은 로즈 베이지 브라운 */
   display: inline-block;
   margin-bottom: 12px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  font-weight: 500;
 }
+
 .main-names {
-  font-size: 1.6rem;
-  font-weight: 300;
-  color: #f3ece4; /* 밝고 세련된 아이보리 */
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: #2c1d17; /* [추천] 선명하고 진한 다크 브라운으로 글씨 가독성 확보 */
   letter-spacing: 2px;
-  margin-bottom: 10px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  margin-bottom: 12px;
 }
 
 .main-date-place {
   font-size: 0.85rem;
-  color: #e2d7cd; /* 부드러운 연베이지 */
+  color: #5a473e; /* 본문 내용용 웜 브라운 */
   letter-spacing: 0.8px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  line-height: 1.5;
 }
-/* 배경 이미지 풀채움 처리 */
+
+/* 메인 사진 영역 */
 .main-photo-area {
   position: absolute;
   top: 0;
@@ -260,20 +266,9 @@ body {
   object-position: center;
 }
 
+/* [핵심] 어두운 그라데이션 제거 (사진 원본 톤 살림) */
 .main-photo-area::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(30, 20, 15, 0.55) 0%,   /* 상단 글자 부분 은은하게 어둡게 */
-    rgba(0, 0, 0, 0.1) 40%,
-    rgba(59, 40, 32, 0.8) 100%   /* 하단은 본문 브라운과 부드럽게 연결 */
-  );
-  z-index: 2;
+  display: none; /* 방해되는 어두운 그라데이션 레이어 완전 끄기 */
 }
 
 /* =================
@@ -286,45 +281,46 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border-bottom: 1px solid #eeebe3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 연한 선 처리 */
 }
 .section-sub {
   font-size: 0.75rem;
   letter-spacing: 3.5px;
-  color: #8c826e;
+  color: #cbb8a9; /* 따뜻한 샌드 베이지 */
   margin-bottom: 12px;
 }
+
 .section-title {
   font-size: 1.25rem;
-  color: #2b2924;
+  color: #f3ece4; /* 밝은 크림색 */
   letter-spacing: 1px;
 }
-/* =================
-   4. D-DAY 타이머
-================= */
+/* ================= 4. D-DAY 타이머 ================= */
 .countdown-timer-section {
   width: 100%;
   padding: 50px 24px;
-  background-color: #ffffff;
+  background-color: transparent !important; /* [수정] 기존 #ffffff 하얀 배경 제거 */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border-bottom: 1px solid #eeebe3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 .dday-title {
   font-size: 0.95rem;
-  color: #8c826e;
+  color: #cbb8a9;
   letter-spacing: 1px;
   margin-bottom: 12px;
 }
+
 .dday-badge {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #1a2321;
+  color: #f3ece4; /* [수정] 기존 #1a2321 대신 밝은 아이보리 적용 */
   letter-spacing: 1px;
-  margin-bottom: 25px;
 }
+
 .timer-container {
   display: flex;
   align-items: center;
