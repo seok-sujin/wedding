@@ -182,7 +182,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color:#e2e8f0;
+  background-color:#ffffff;
 }
 #bgm-btn {
   /* BGM 버튼도 딥 브라운 바탕에 어울리도록 은은한 반투명 톤으로 수정 */
@@ -197,22 +197,24 @@ body {
   transition: all 0.3s ease;
 }
 .main-cover {
-    background-color: transparent;
-    padding: 0; /* 사진이 끝까지 채워지도록 패딩 제거 */
-    text-align: center;
-    border-bottom: 1px solid #eeebe3;
-    position: relative;
-    overflow: hidden;
+  width: 100%;
+  height: 100vh; /* 화면 높이 전체를 차지하도록 설정 (필요에 따라 조절 가능) */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* [핵심 수정] 글자를 상단에 배치하도록 변경 */
+  padding: 0; /* 기존 패딩 제거 */
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border-bottom: 1px solid #eeebe3;
 }
 .cover-text {
-    position: absolute;
-    bottom: 30px; /* 사진 하단에 텍스트 배치 */
-    left: 0;
-    right: 0;
-    z-index: 3; /* 사진보다 위에 글씨가 오도록 설정 */
-    margin-bottom: 0;
-    padding: 0 20px;
+  position: relative; /* 고정 위치 해제 */
+  z-index: 3;
+  margin-bottom: 0;
+  padding: 80px 20px 0; /* [핵심 수정] 상단 패딩을 조절하여 스티키 바 아래에 배치 */
 }
+
 .wedding-title {
   font-size: 0.75rem;
   letter-spacing: 5px;
