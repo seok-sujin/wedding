@@ -254,3 +254,53 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+// ================= 5. 계좌번호 복사 기능 =================
+function copyAccount(accountNumber) {
+  navigator.clipboard.writeText(accountNumber).then(() => {
+    alert("계좌번호가 복사되었습니다.");
+  }).catch(err => {
+    // 구형 브라우저 대응
+    const textarea = document.createElement("textarea");
+    textarea.value = accountNumber;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    alert("계좌번호가 복사되었습니다.");
+  });
+}
+
+// ================= 6. 카카오톡 공유하기 =================
+function shareKakao() {
+  if (typeof Kakao !== 'undefined') {
+    if (!Kakao.isInitialized()) {
+      // 카카오 디벨로퍼스에서 발급받은 JavaScript 키를 입력하세요.
+      Kakao.init('YOUR_KAKAO_JAVASCRIPT_KEY'); 
+    }
+    
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '석수진 ♡ 홍길동 결혼식에 초대합니다',
+        description: '2026년 11월 28일 토요일 오후 1시\n홀리데이 인 광주 별관',
+        imageUrl: window.location.origin + '/images/photo1.jpg',
+        link: {
+          mobileWebUrl: window.location.href,
+          webUrl: window.location.href,
+        },
+      },
+      buttons: [
+        {
+          title: '모바일 청첩장 보기',
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+      ],
+    });
+  } else {
+    alert("카카오톡 공유 기능을 불러오는 중입니다. 잠시 후 다시 시도해 주세요.");
+  }
+}
