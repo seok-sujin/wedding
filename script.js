@@ -1,4 +1,13 @@
-
+// 인트로 봉투 열기 함수
+function openEnvelope() {
+  const intro = document.getElementById('intro-overlay');
+  if (intro) {
+    intro.classList.add('open');
+    setTimeout(() => {
+      intro.style.display = 'none';
+    }, 1000);
+  }
+}
 // 🔻날짜 기입 (현재 2027년 1월 1일 12시 30분으로 설정되어있음)
 const WEDDING_YEAR = 2026; // 년도
 const WEDDING_MONTH = 11; // 월
