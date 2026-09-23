@@ -20,43 +20,39 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="400">
- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+ <!-- 🔻 인트로 오버레이 영역 (이 안에서 div가 깔끔하게 닫혀야 합니다) -->
   <div id="intro-overlay" class="loading" onclick="openEnvelope()">
     <div class="envelope-wrapper">
       <div class="envelope">
         <div class="letter-sheet card-style">
-
-  <div class="card-photos">
-    <img src="images/card-photo.jpg" alt="카드 사진">
-  </div>
-
-  <div class="card-names">
-
-<!-- 🔻신랑 신부 영어 이름 기입 -->
-    <span>HEO SEOK</span>
-    <span>&</span>
-    <span>LEE SUJIN</span>
-  </div>
-
-  <div class="card-bottom">
-
-<!-- 🔻예식일시 기입 -->
-    <span>2026</span>
-    <span>OUR<br>WEDDING</span>
-    <span>1128</span>
-  </div>
-
-</div>
+          <div class="card-photos">
+            <img src="images/card-photo.jpg" alt="카드 사진">
+          </div>
+          <div class="card-names">
+            <span>HEO SEOK</span>
+            <span>&</span>
+            <span>LEE SUJIN</span>
+          </div>
+          <div class="card-bottom">
+            <span>2026</span>
+            <span>OUR<br>WEDDING</span>
+            <span>1128</span>
+          </div>
+        </div>
       </div>
       <p class="click-notice">TAP TO OPEN</p>
     </div>
-  </div>
+    </div>
+  </div> <!-- 👈 intro-overlay가 여기서 정확히 닫혀야 합니다! -->
+
+  <!-- 메인 콘텐츠 영역 시작 -->
   <div id="main-content">
     <div id="top-sticky-bar">
       <audio id="bgm" loop>
