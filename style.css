@@ -24,7 +24,8 @@ html,
 body {
   width: 100%;
   min-height: 100%;
-  background-color: #182940;
+  background-color: #2b1c16; /* 외부 전체 배경: 진한 밤색/브라운 */
+background-image: none !important;
   color: #e2e8f0;
   font-family: 'Noto Sans KR', -apple-system, sans-serif;
   line-height: 1.6;
@@ -32,21 +33,35 @@ body {
 }
 
 #main-content {
-    display: none;
+    display: block; /* 또는 flex */
     max-width: 420px;
     width: calc(100% - 32px);
     margin: 40px auto;
-    
-    /* [수정] 흰색(#ffffff) 대신 따뜻한 베이지/종이 배경색 적용 */
-    background-color: #F5EFEB; 
-    
-    color: #4A3B32; /* 기본 글자색도 다크 브라운으로 변경 */
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4); /* 편지지가 붕 떠있는 듯한 고급스러운 그림자 */
     overflow: hidden;
     position: relative;
     z-index: 5;
+    
+    /* 📜 [핵심] 편지지 종이 질감 적용 */
+    background-color: #3b2820; /* 딥 브라운 베이스 */
+    background-image: url('images/bg_texture.jpg'); /* 종이 질감 이미지 */
+    background-size: auto; /* 확대 없이 원본 입자 크기 유지 */
+    background-repeat: repeat; /* 자연스럽게 패턴 반복 */
+    
+    color: #e2d7cd;
 }
+
+/* 내부 각 섹션 배경을 투명하게 만들어 편지지 질감이 보이도록 설정 */
+.main-cover, 
+.countdown-timer-section, 
+.content-section,
+.gallery-section,
+.wedding-footer {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
 
 /* 폰트 */
 .section-title,
@@ -218,7 +233,8 @@ body {
   z-index: 3;
   width: 100%;
   text-align: center;
-  margin-top: 60px; /* 상단 스티키 바 버튼과 겹치지 않게 여백 부여 */
+margin-top: 60px;    /* 상단 스티키 바와의 간격 */
+  margin-bottom: 35px; /* 💡 [핵심] 글자 아래와 사진 사이에 적절한 여백 추가 */
   padding: 0 20px;
 }
 
@@ -423,13 +439,16 @@ body {
   padding: 4px 0;
   display: inline-block;
 }
+
 .days .wedding-day {
   position: relative;
-  color: #1a2321;
+  color: #F5EFEB !important; /* 💡 [핵심] 하트 안 숫자를 밝은 베이지 톤으로 변경 */
   font-weight: bold;
   background-color: transparent;
   z-index: 1;
 }
+
+/* 결혼식 당일 하트 색상 (딥 브라운) */
 .days .wedding-day::before {
   content: "♥";
   position: absolute;
@@ -437,9 +456,9 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 3.25rem;
-  color: #d4c3a3;
+  color: #3b2820 !important; /* 💡 [핵심] 인트로 배경과 동일한 딥 브라운 하트 */
   z-index: -1;
-  opacity: 0.55;
+  opacity: 0.9; /* 뚜렷하게 보이고 싶다면 0.85~1.0 사이로 조정 */
 }
 .countdown-text {
   margin-top: 35px;
