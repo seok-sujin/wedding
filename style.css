@@ -100,14 +100,23 @@ background-image: none !important;
 ================= */
 #intro-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: #F5EFEB;
-  z-index: 10000;
+  background-color: #f7f5f0;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999; /* 화면 맨 앞으로 가져오기 */
+  cursor: pointer; /* 클릭 가능한 손가락 모양 표시 */
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#intro-overlay.open {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 .envelope-wrapper {
   position: relative;
