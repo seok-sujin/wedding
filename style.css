@@ -280,7 +280,7 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
 ================= */
 .content-section {
   width: 100%;
-  padding: 80px 24px;
+  padding: 60px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
