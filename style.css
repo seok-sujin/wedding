@@ -471,9 +471,10 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
   top: 50%;
   left: 50%;
   font-size: 3.25rem;
+  transform: translate(-50%, -50%);
   color: #3b2820 !important; /* 💡 [핵심] 인트로 배경과 동일한 딥 브라운 하트 */
   z-index: -1;
-  opacity: 0.9; /* 뚜렷하게 보이고 싶다면 0.85~1.0 사이로 조정 */
+  opacity: 1; /* 뚜렷하게 보이고 싶다면 0.85~1.0 사이로 조정 */
 }
 .countdown-text {
   margin-top: 35px;
@@ -1066,7 +1067,7 @@ body::before {
 
 .days .wedding-day::before {
   color: #4A3B32;
-  opacity: 0.65;
+  opacity: 1;
 }
 
 .wedding-footer {
