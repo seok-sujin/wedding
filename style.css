@@ -1058,7 +1058,6 @@ html {
 }
 
 body, html {
-  background-color: #F7F4EF !important; /* 원하시는 베이지 배경색 */
   color-adjust: exact !important;
   -webkit-print-color-adjust: exact !important;
 }
@@ -1066,7 +1065,6 @@ body, html {
 /* 3. 시스템 다크모드 감지 시에도 무조건 라이트모드 색상 강제 적용 */
 @media (prefers-color-scheme: dark) {
   html, body {
-    background-color: #F7F4EF !important; /* 베이지 배경 고정 */
     color: #4d4340 !important; /* 텍스트 색상 고정 */
   }
   
