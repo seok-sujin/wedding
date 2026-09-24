@@ -81,7 +81,7 @@ background-image: none !important;
 
 .card-names {
     font-family: 'Cafe24Lovingu' !important;
-    font-size: 2rem !important; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
+   /* font-size: 0.8rem !important; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
 }
 
 /* =================
@@ -252,7 +252,7 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
 }
 
 .main-names {
-  font-size: 1rem;
+  font-size: 1.7rem;
   font-weight: 400;
   color: #2c1d17; /* [추천] 선명하고 진한 다크 브라운으로 글씨 가독성 확보 */
   letter-spacing: 2px;
