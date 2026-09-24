@@ -590,6 +590,7 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
    9. 마음 전하실 곳
 ================= */
 .account-section {
+ background-color: #F7F4EF !important;
   border-bottom: none;
 }
 .account-intro {
