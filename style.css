@@ -51,9 +51,7 @@ background-image: none !important;
     color: #e2d7cd;
 }
 
-.main-cover, .countdown-timer-section, .content-section, .gallery-section, {
-  background-color: #F7F4EF !important;
-}
+
 
 /* 폰트 */
 .section-title,
