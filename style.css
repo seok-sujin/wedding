@@ -311,19 +311,8 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
   color: #f3ece4; /* 밝은 크림색 */
   letter-spacing: 1px;
 }
-/* ================= 4. D-DAY 타이머 (브라운 배경으로 변경) ================= */
 
-/* D-DAY 타이머 전체 감싸는 부모 박스 가로 정렬 보정 */
-.countdown-container, .timer-wrapper {
-    display: flex;
-    flex-direction: row; /* 가로로 나열 */
-    align-items: center;
-    justify-content: center;
-    gap: 8px; /* 박스 사이의 간격 */
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-}
+/* ================= 4. D-DAY 타이머 (가로 정렬 및 브라운 배경) ================= */
 .countdown-timer-section {
     width: 100%;
     padding: 50px 24px;
@@ -331,29 +320,40 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-color: #3b2820; /* 딥 브라운 배경으로 변경하여 경계 구분 */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 은은한 구분선 */
+    background-color: #3b2820; /* 딥 브라운 배경 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .dday-title {
     font-size: 0.95rem;
-    color: #cbb8a9; /* 밝은 샌드 베이지 톤으로 타이틀 가독성 확보 */
+    color: #cbb8a9;
     letter-spacing: 1px;
     margin-bottom: 12px;
 }
 
 .dday-badge {
-    padding-bottom: 11px;
+    padding-bottom: 15px;
     font-size: 1.4rem;
     font-weight: 600;
-    color: #f3ece4; /* 밝은 크림 아이보리 톤 */
+    color: #f3ece4;
     letter-spacing: 1px;
 }
 
-/* 타이머 내부 작은 박스들도 브라운 배경에 어울리도록 조정 */
+/* 💡 타이머 박스들을 감싸는 영역(HTML 상의 부모 요소 또는 flex 적용) */
+.countdown-timer-section > div:not(.dday-title):not(.dday-badge) {
+    display: flex;
+    flex-direction: row; /* 무조건 가로로 배치 */
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* 박스 사이 간격 */
+    width: 100%;
+    max-width: 320px;
+}
+
+/* 타이머 내부 작은 박스 스타일 */
 .time-box {
     flex: 1;
-    background-color: rgba(255, 255, 255, 0.08); /* 반투명한 밝은 배경 */
+    background-color: rgba(255, 255, 255, 0.08);
     border-radius: 6px;
     padding: 12px 0 10px;
     display: flex;
@@ -365,23 +365,25 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
 .time-box span {
     font-size: 1.3rem;
     font-weight: 500;
-    color: #f3ece4; /* 숫자 색상을 밝게 */
+    color: #f3ece4;
     font-variant-numeric: tabular-nums;
 }
 
 .time-box label {
     font-size: 0.6rem;
-    color: #cbb8a9; /* 라벨 색상도 부드러운 베이지로 */
+    color: #cbb8a9;
     letter-spacing: 1px;
     margin-top: 4px;
 }
 
 .time-divider {
     font-size: 1.1rem;
-    color: #a38f85; /* 구분 기호(:) 색상 */
-    padding-bottom: 14px;
+    color: #a38f85;
+    padding-bottom: 4px;
     font-weight: 300;
 }
+
+
 /* =================
    5. 초대글
 ================= */
