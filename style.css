@@ -66,6 +66,7 @@ background-image: none !important;
 .section-sub,
 .wedding-title,
 .calendar-month,
+.main-names,
 .dday-title {
   font-family: 'Nanum Myeongjo', serif;
   font-weight: 400;
@@ -78,10 +79,9 @@ background-image: none !important;
   color: #4a4740;
 }
 
-.main-names {
+.card-names {
     font-family: 'Cafe24Lovingu' !important;
-    font-size: 2.5rem !important; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
-    margin-bottom: 10px;
+    font-size: 2rem !important; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
 }
 
 /* =================
