@@ -69,6 +69,14 @@ background-image: none !important;
   color: #4a4740;
 }
 
+.main-names {
+    font-family: 'GreatVibes', 'Nanum Myeongjo', serif; /* 필기체 적용 */
+    font-size: 2rem; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
 /* =================
    1. 인트로 봉투
 ================= */
