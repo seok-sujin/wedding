@@ -287,3 +287,83 @@ window.addEventListener("load", function () {
 const SUPABASE_URL = 'https://afqlaropaguqopfuxcws.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_uWOLpctq1a3M4elXZa-5Aw_Yuim-LUA'; // 방금 복사한 Publishable key 붙여넣기
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// DOM이 로드된 후 실행
+document.addEventListener("DOMContentLoaded", function () {
+    const submitBtn = document.getElementById("guestSubmitBtn");
+    const nameInput = document.getElementById("guestName");
+    const messageInput = document.getElementById("guestMessage");
+    const listContainer = document.getElementById("guestbookList");
+
+    // 1. 저장된 방명록 불러오기
+    loadGuestbook();
+
+    // 2. 남기기 버튼 클릭 이벤트
+    if (submitBtn) {
+        submitBtn.addEventListener("click", function () {
+            const name = nameInput.value.trim();
+            const message = messageInput.value.trim();
+
+            if (!name || !message) {
+                alert("이름과 메시지를 모두 입력해주세요.");
+                return;
+            }
+
+            const newEntry = {
+                name: name,
+                message: message,
+                date: new Date().toLocaleDateString()
+            };
+
+            // 기존 데이터 가져오기 (없으면 빈 배열)
+            let guestbookData = JSON.parse(localStorage.getItem("weddingGuestbook")) || [];
+            
+            // 새 글을 맨 위에 추가
+            guestbookData.unshift(newEntry);
+
+            // LocalStorage에 저장
+            localStorage.setItem("weddingGuestbook", JSON.stringify(guestbookData));
+
+            // 입력창 초기화 및 목록 새로고침
+            nameInput.value = "";
+            messageInput.value = "";
+            loadGuestbook();
+        });
+    }
+
+    // 3. 방명록 화면에 그려주는 함수
+    function loadGuestbook() {
+        if (!listContainer) return;
+        
+        const guestbookData = JSON.parse(localStorage.getItem("weddingGuestbook")) || [];
+        listContainer.innerHTML = "";
+
+        if (guestbookData.length === 0) {
+            listContainer.innerHTML = '<p class="no-guestbook">아직 작성된 방명록이 없습니다. 첫 축하 인사를 남겨주세요!</p>';
+            return;
+        }
+
+        guestbookData.forEach(function (item) {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "guestbook-item";
+            itemDiv.innerHTML = `
+                <div class="guestbook-header">
+                    <span class="guest-name">${escapeHtml(item.name)}</span>
+                    <span class="guest-date">${item.date}</span>
+                </div>
+                <p class="guest-message">${escapeHtml(item.message)}</p>
+            `;
+            listContainer.appendChild(itemDiv);
+        });
+    }
+
+    // 보안을 위한 특수문자 처리 함수 (XSS 방지)
+    function escapeHtml(text) {
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+});
