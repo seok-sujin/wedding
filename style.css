@@ -470,7 +470,6 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   font-size: 3.25rem;
   color: #3b2820 !important; /* 💡 [핵심] 인트로 배경과 동일한 딥 브라운 하트 */
   z-index: -1;
