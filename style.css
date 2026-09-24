@@ -308,68 +308,64 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
   color: #f3ece4; /* 밝은 크림색 */
   letter-spacing: 1px;
 }
-/* ================= 4. D-DAY 타이머 ================= */
+/* ================= 4. D-DAY 타이머 (브라운 배경으로 변경) ================= */
 .countdown-timer-section {
-  width: 100%;
-  padding: 50px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-   background-color: #fcfbfa;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    padding: 50px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #3b2820; /* 딥 브라운 배경으로 변경하여 경계 구분 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 은은한 구분선 */
 }
 
 .dday-title {
-  font-size: 0.95rem;
-  color: #cbb8a9;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #cbb8a9; /* 밝은 샌드 베이지 톤으로 타이틀 가독성 확보 */
+    letter-spacing: 1px;
+    margin-bottom: 12px;
 }
 
 .dday-badge {
-  padding-bottom: 11px;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #f3ece4; /* [수정] 기존 #1a2321 대신 밝은 아이보리 적용 */
-  letter-spacing: 1px;
+    padding-bottom: 11px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #f3ece4; /* 밝은 크림 아이보리 톤 */
+    letter-spacing: 1px;
 }
 
-.timer-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  max-width: 320px;
-}
+/* 타이머 내부 작은 박스들도 브라운 배경에 어울리도록 조정 */
 .time-box {
-  flex: 1;
-  background-color: #f7f6f2;
-  border-radius: 6px;
-  padding: 12px 0 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.08); /* 반투명한 밝은 배경 */
+    border-radius: 6px;
+    padding: 12px 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 .time-box span {
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: #3b3934;
-  font-variant-numeric: tabular-nums;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #f3ece4; /* 숫자 색상을 밝게 */
+    font-variant-numeric: tabular-nums;
 }
+
 .time-box label {
-  font-size: 0.6rem;
-  color: #a19c91;
-  letter-spacing: 1px;
-  margin-top: 4px;
+    font-size: 0.6rem;
+    color: #cbb8a9; /* 라벨 색상도 부드러운 베이지로 */
+    letter-spacing: 1px;
+    margin-top: 4px;
 }
+
 .time-divider {
-  font-size: 1.1rem;
-  color: #c4beb3;
-  padding-bottom: 14px;
-  font-weight: 300;
+    font-size: 1.1rem;
+    color: #a38f85; /* 구분 기호(:) 색상 */
+    padding-bottom: 14px;
+    font-weight: 300;
 }
 /* =================
    5. 초대글
