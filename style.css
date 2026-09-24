@@ -80,7 +80,7 @@ background-image: none !important;
 
 .main-names {
     font-family: 'TANGERINE_BOLD' !important;
-     font-size: 1.5rem; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
+     font-size: 2.5rem; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
     letter-spacing: 1px;
     margin-bottom: 10px;
 }
