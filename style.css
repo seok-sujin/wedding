@@ -18,6 +18,9 @@ html, body {
   min-height: 100%;
   /* ... 기존 코드 ... */
 }
+
+/* 구글 웹폰트(Great Vibes 필기체) 불러오기 */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 /* 추가 설정 끝 */
 
 html,
@@ -309,6 +312,18 @@ margin-top: 60px;    /* 상단 스티키 바와의 간격 */
   letter-spacing: 1px;
 }
 /* ================= 4. D-DAY 타이머 (브라운 배경으로 변경) ================= */
+
+/* D-DAY 타이머 전체 감싸는 부모 박스 가로 정렬 보정 */
+.countdown-container, .timer-wrapper {
+    display: flex;
+    flex-direction: row; /* 가로로 나열 */
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* 박스 사이의 간격 */
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+}
 .countdown-timer-section {
     width: 100%;
     padding: 50px 24px;
