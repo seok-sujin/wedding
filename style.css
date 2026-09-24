@@ -1061,16 +1061,3 @@ body, html {
   color-adjust: exact !important;
   -webkit-print-color-adjust: exact !important;
 }
-
-/* 3. 시스템 다크모드 감지 시에도 무조건 라이트모드 색상 강제 적용 */
-@media (prefers-color-scheme: dark) {
-  html, body {
-    color: #4d4340 !important; /* 텍스트 색상 고정 */
-  }
-  
-  /* 카드나 주요 박스 요소의 브라운 색상도 어둡게 변하는 것 방지 */
-  #main-content {
-    background-color: #3b2820 !important; /* 원래 설정하셨던 브라운 톤 고정 */
-    color: #e2d7cd !important;
-  }
-}
