@@ -1048,18 +1048,20 @@ body::before {
   color: #fff8f6;
 }
 
-/* 1. 기기 및 브라우저의 강제 다크모드 렌더링 무력화 */
+/* ================= 📱 모바일 브라우저 다크모드 및 색상 변환 방지 ================= */
 :root {
-  color-scheme: light only;
-  supported-color-schemes: light;
+    color-scheme: light only;
+    supported-color-schemes: light;
 }
 
-/* 2. 사파리 및 인앱 브라우저의 색상 자동 보정 방지 */
 html {
-  -webkit-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
 }
 
-body, html {
-  color-adjust: exact !important;
-  -webkit-print-color-adjust: exact !important;
+/* 특정 브라우저에서 배경색이 임의로 반전되는 현상 방지 */
+body {
+    color-scheme: light !important;
+    /* 전체 배경을 특정 색으로 강제 고정하기보다, 각 섹션별 배경색(#fcf8f8 등)이 잘 보이도록 둡니다 */
 }
