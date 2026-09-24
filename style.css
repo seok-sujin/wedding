@@ -94,6 +94,8 @@ background-image: none !important;
     background-image: url('images/star-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
+   /* 검은색 아이콘을 청첩장 브라운 톤과 어울리는 갈색으로 바꿔주는 필터 */
+    filter: invert(35%) sepia(20%) saturate(400%) hue-rotate(340deg);
 }
 
 /* 뒤쪽 별 아이콘 */
@@ -105,6 +107,8 @@ background-image: none !important;
     background-image: url('images/star-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
+   /* 검은색 아이콘을 청첩장 브라운 톤과 어울리는 갈색으로 바꿔주는 필터 */
+    filter: invert(35%) sepia(20%) saturate(400%) hue-rotate(340deg);
 }
 
 /* =================
