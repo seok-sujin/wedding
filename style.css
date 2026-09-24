@@ -84,6 +84,34 @@ background-image: none !important;
    /* font-size: 0.8rem !important; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
 }
 
+.decorated-star {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* 글자와 별 사이의 간격 조절 */
+}
+
+/* 앞쪽 별 아이콘 */
+.decorated-star::before {
+    content: "";
+    display: inline-block;
+    width: 14px;  /* 아이콘 크기 조절 */
+    height: 14px;
+    background-image: url('images/star-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* 뒤쪽 별 아이콘 */
+.decorated-star::after {
+    content: "";
+    display: inline-block;
+    width: 14px;  /* 아이콘 크기 조절 */
+    height: 14px;
+    background-image: url('images/star-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 /* =================
    1. 인트로 봉투
 ================= */
