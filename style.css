@@ -21,7 +21,7 @@ html, body {
 
 @font-face {
     font-family: 'Cafe24Lovingu';
-    src: url('Cafe24Lovingu.TTF') format('truetype');
+    src: url('Cafe24Lovingu.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
