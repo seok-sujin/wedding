@@ -1118,3 +1118,91 @@ body {
     color-scheme: light !important;
     /* 전체 배경을 특정 색으로 강제 고정하기보다, 각 섹션별 배경색(#fcf8f8 등)이 잘 보이도록 둡니다 */
 }
+
+/* 방명록 섹션 스타일 */
+.guestbook-section {
+    padding: 40px 20px;
+    background-color: #faf8f5; /* 주변 배경톤과 맞춤 */
+}
+
+.guestbook-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+}
+
+.guestbook-form input,
+.guestbook-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0d6cd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.guestbook-form button {
+    padding: 12px;
+    background-color: #7d6b5d; /* 청첩장 포인트 브라운 컬러 */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.guestbook-form button:hover {
+    background-color: #655447;
+}
+
+.guestbook-list {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.guestbook-item {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eae3dc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    text-align: left;
+}
+
+.guestbook-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.guest-name {
+    font-weight: bold;
+    color: #4a3f35;
+}
+
+.guest-date {
+    color: #999;
+}
+
+.guest-message {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    word-break: break-all;
+}
+
+.no-guestbook {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    padding: 20px;
+}
