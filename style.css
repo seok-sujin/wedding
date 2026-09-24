@@ -43,8 +43,6 @@ background-image: none !important;
     position: relative;
     z-index: 5;
     
-    /* 📜 [핵심] 편지지 종이 질감 적용 */
-    background-color: #3b2820; /* 딥 브라운 베이스 */
     background-size: auto; /* 확대 없이 원본 입자 크기 유지 */
     background-repeat: repeat; /* 자연스럽게 패턴 반복 */
     
