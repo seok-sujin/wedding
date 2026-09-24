@@ -288,19 +288,21 @@ const SUPABASE_URL = 'https://afqlaropaguqopfuxcws.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_uWOLpctq1a3M4elXZa-5Aw_Yuim-LUA'; // 방금 복사한 Publishable key 붙여넣기
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// DOM이 로드된 후 실행
+// ==========================================
+// Supabase 연동 방명록 기능 (저장 및 불러오기)
+// ==========================================
 document.addEventListener("DOMContentLoaded", function () {
     const submitBtn = document.getElementById("guestSubmitBtn");
     const nameInput = document.getElementById("guestName");
     const messageInput = document.getElementById("guestMessage");
     const listContainer = document.getElementById("guestbookList");
 
-    // 1. 저장된 방명록 불러오기
-    loadGuestbook();
+    // 1. 페이지가 열릴 때 Supabase에서 방명록 목록 불러오기
+    fetchGuestbook();
 
-    // 2. 남기기 버튼 클릭 이벤트
+    // 2. '메시지 남기기' 버튼 클릭 시 실행
     if (submitBtn) {
-        submitBtn.addEventListener("click", function () {
+        submitBtn.addEventListener("click", async function () {
             const name = nameInput.value.trim();
             const message = messageInput.value.trim();
 
@@ -309,56 +311,85 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            const newEntry = {
-                name: name,
-                message: message,
-                date: new Date().toLocaleDateString()
-            };
+            try {
+                // Supabase 'guestbook' 테이블에 데이터 INSERT
+                const { error } = await supabase
+                    .from('guestbook')
+                    .insert([
+                        { name: name, message: message }
+                    ]);
 
-            // 기존 데이터 가져오기 (없으면 빈 배열)
-            let guestbookData = JSON.parse(localStorage.getItem("weddingGuestbook")) || [];
-            
-            // 새 글을 맨 위에 추가
-            guestbookData.unshift(newEntry);
+                if (error) {
+                    console.error("Supabase 저장 오류:", error);
+                    alert("메시지 저장 중 오류가 발생했습니다.");
+                    return;
+                }
 
-            // LocalStorage에 저장
-            localStorage.setItem("weddingGuestbook", JSON.stringify(guestbookData));
+                // 입력창 비우기 및 목록 새로고침
+                nameInput.value = "";
+                messageInput.value = "";
+                fetchGuestbook();
+                alert("축하 메시지가 등록되었습니다!");
 
-            // 입력창 초기화 및 목록 새로고침
-            nameInput.value = "";
-            messageInput.value = "";
-            loadGuestbook();
+            } catch (err) {
+                console.error("네트워크 예외 발생:", err);
+                alert("서버와 통신 중 문제가 발생했습니다.");
+            }
         });
     }
 
-    // 3. 방명록 화면에 그려주는 함수
-    function loadGuestbook() {
+    // 3. Supabase 데이터베이스에서 방명록을 조회하여 화면에 그려주는 함수
+    async function fetchGuestbook() {
         if (!listContainer) return;
-        
-        const guestbookData = JSON.parse(localStorage.getItem("weddingGuestbook")) || [];
-        listContainer.innerHTML = "";
 
-        if (guestbookData.length === 0) {
-            listContainer.innerHTML = '<p class="no-guestbook">아직 작성된 방명록이 없습니다. 첫 축하 인사를 남겨주세요!</p>';
-            return;
+        try {
+            // Supabase 'guestbook' 테이블에서 모든 데이터 가져오기 (최신 작성순 정렬)
+            const { data: guestbookData, error } = await supabase
+                .from('guestbook')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error("Supabase 불러오기 오류:", error);
+                listContainer.innerHTML = '<p class="no-guestbook">방명록을 불러오는 데 실패했습니다.</p>';
+                return;
+            }
+
+            listContainer.innerHTML = "";
+
+            if (!guestbookData || guestbookData.length === 0) {
+                listContainer.innerHTML = '<p class="no-guestbook">아직 작성된 방명록이 없습니다. 첫 축하 인사를 남겨주세요!</p>';
+                return;
+            }
+
+            // 가져온 데이터를 반복문으로 화면 카드에 추가
+            guestbookData.forEach(function (item) {
+                let formattedDate = "";
+                if (item.created_at) {
+                    const dateObj = new Date(item.created_at);
+                    formattedDate = `${dateObj.getFullYear()}.${String(dateObj.getMonth() + 1).padStart(2, '0')}.${String(dateObj.getDate()).padStart(2, '0')}`;
+                }
+
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "guestbook-item";
+                itemDiv.innerHTML = `
+                    <div class="guestbook-header">
+                        <span class="guest-name">${escapeHtml(item.name)}</span>
+                        <span class="guest-date">${formattedDate}</span>
+                    </div>
+                    <p class="guest-message">${escapeHtml(item.message)}</p>
+                `;
+                listContainer.appendChild(itemDiv);
+            });
+
+        } catch (err) {
+            console.error("데이터 조회 중 예외 발생:", err);
         }
-
-        guestbookData.forEach(function (item) {
-            const itemDiv = document.createElement("div");
-            itemDiv.className = "guestbook-item";
-            itemDiv.innerHTML = `
-                <div class="guestbook-header">
-                    <span class="guest-name">${escapeHtml(item.name)}</span>
-                    <span class="guest-date">${item.date}</span>
-                </div>
-                <p class="guest-message">${escapeHtml(item.message)}</p>
-            `;
-            listContainer.appendChild(itemDiv);
-        });
     }
 
-    // 보안을 위한 특수문자 처리 함수 (XSS 방지)
+    // 보안을 위한 HTML 특수문자 변환 함수 (XSS 방지)
     function escapeHtml(text) {
+        if (!text) return "";
         return text
             .replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
