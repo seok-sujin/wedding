@@ -289,7 +289,7 @@ const SUPABASE_KEY = 'sb_publishable_uWOLpctq1a3M4elXZa-5Aw_Yuim-LUA'; // 방금
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ==========================================
-// Supabase 연동 방명록 기능 (저장 및 불러오기)
+// Supabase 연동 방명록 기능
 // ==========================================
 document.addEventListener("DOMContentLoaded", function () {
     const submitBtn = document.getElementById("guestSubmitBtn");
@@ -297,10 +297,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const messageInput = document.getElementById("guestMessage");
     const listContainer = document.getElementById("guestbookList");
 
-    // 1. 페이지가 열릴 때 Supabase에서 방명록 목록 불러오기
+    // 1. 페이지 로드 시 Supabase에서 방명록 목록 불러오기
     fetchGuestbook();
 
-    // 2. '메시지 남기기' 버튼 클릭 시 실행
+    // 2. 메시지 남기기 버튼 클릭 시
     if (submitBtn) {
         submitBtn.addEventListener("click", async function () {
             const name = nameInput.value.trim();
@@ -312,45 +312,41 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             try {
-                // Supabase 'guestbook' 테이블에 데이터 INSERT
+                // Supabase 'guestbook' 테이블에 데이터 저장
                 const { error } = await supabase
                     .from('guestbook')
-                    .insert([
-                        { name: name, message: message }
-                    ]);
+                    .insert([{ name: name, message: message }]);
 
                 if (error) {
-                    console.error("Supabase 저장 오류:", error);
+                    console.error("저장 오류:", error);
                     alert("메시지 저장 중 오류가 발생했습니다.");
                     return;
                 }
 
-                // 입력창 비우기 및 목록 새로고침
+                // 입력창 초기화 및 목록 새로고침
                 nameInput.value = "";
                 messageInput.value = "";
                 fetchGuestbook();
                 alert("축하 메시지가 등록되었습니다!");
 
             } catch (err) {
-                console.error("네트워크 예외 발생:", err);
-                alert("서버와 통신 중 문제가 발생했습니다.");
+                console.error("네트워크 오류:", err);
             }
         });
     }
 
-    // 3. Supabase 데이터베이스에서 방명록을 조회하여 화면에 그려주는 함수
+    // 3. Supabase에서 방명록 목록 가져와서 화면에 그리기
     async function fetchGuestbook() {
         if (!listContainer) return;
 
         try {
-            // Supabase 'guestbook' 테이블에서 모든 데이터 가져오기 (최신 작성순 정렬)
             const { data: guestbookData, error } = await supabase
                 .from('guestbook')
                 .select('*')
                 .order('created_at', { ascending: false });
 
             if (error) {
-                console.error("Supabase 불러오기 오류:", error);
+                console.error("불러오기 오류:", error);
                 listContainer.innerHTML = '<p class="no-guestbook">방명록을 불러오는 데 실패했습니다.</p>';
                 return;
             }
@@ -362,7 +358,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // 가져온 데이터를 반복문으로 화면 카드에 추가
             guestbookData.forEach(function (item) {
                 let formattedDate = "";
                 if (item.created_at) {
@@ -383,11 +378,11 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
         } catch (err) {
-            console.error("데이터 조회 중 예외 발생:", err);
+            console.error("조회 예외 발생:", err);
         }
     }
 
-    // 보안을 위한 HTML 특수문자 변환 함수 (XSS 방지)
+    // XSS 방지 함수
     function escapeHtml(text) {
         if (!text) return "";
         return text
