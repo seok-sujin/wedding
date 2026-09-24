@@ -19,8 +19,15 @@ html, body {
   /* ... 기존 코드 ... */
 }
 
-/* 구글 웹폰트(Great Vibes 필기체) 불러오기 */
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@font-face {
+    font-family: 'RaybentMango';
+    src: url('RAYBENT MANGO.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 /* 추가 설정 끝 */
 
 html,
@@ -72,12 +79,11 @@ background-image: none !important;
   color: #4a4740;
 }
 
-.main-names {
-    font-family: 'GreatVibes', 'Nanum Myeongjo', serif; /* 필기체 적용 */
-    font-size: 2rem; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
-    font-weight: 400;
+.main-name {
+    font-family: 'RaybentMango', 'Great Vibes', sans-serif;
+     font-size: 1.5rem; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
     letter-spacing: 1px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 /* =================
