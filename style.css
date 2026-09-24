@@ -20,7 +20,7 @@ html, body {
 }
 
 @font-face {
-    font-family: 'RaybentMango';
+    font-family: 'RAYBENT MANGO';
     src: url('RAYBENT MANGO.TTF') format('truetype');
     font-weight: normal;
     font-style: normal;
@@ -79,7 +79,7 @@ background-image: none !important;
 }
 
 .main-name {
-    font-family: 'RaybentMango', 'Great Vibes', sans-serif;
+    font-family: 'RAYBENT MANGO' !important;
      font-size: 1.5rem; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
     letter-spacing: 1px;
     margin-bottom: 10px;
