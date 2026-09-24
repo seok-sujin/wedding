@@ -1119,25 +1119,26 @@ body {
     /* 전체 배경을 특정 색으로 강제 고정하기보다, 각 섹션별 배경색(#fcf8f8 등)이 잘 보이도록 둡니다 */
 }
 
-/* 방명록 섹션 스타일 */
+/* 방명록 입력 및 목록 전체 컨테이너 */
 .guestbook-section {
-    padding: 40px 20px;
-    background-color: #faf8f5; /* 주변 배경톤과 맞춤 */
+    padding: 50px 20px;
+    background-color: #f7f4ef; /* 은은한 배경톤 */
+    text-align: center;
 }
 
 .guestbook-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-width: 500px;
-    margin: 0 auto 30px auto;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto 40px auto;
 }
 
 .guestbook-form input,
 .guestbook-form textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #e0d6cd;
+    padding: 14px;
+    border: 1px solid #dcd3cb;
     border-radius: 8px;
     font-family: inherit;
     font-size: 14px;
@@ -1146,8 +1147,8 @@ body {
 }
 
 .guestbook-form button {
-    padding: 12px;
-    background-color: #7d6b5d; /* 청첩장 포인트 브라운 컬러 */
+    padding: 14px;
+    background-color: #5c4e43; /* 차분한 브라운 버튼 */
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -1157,52 +1158,77 @@ body {
 }
 
 .guestbook-form button:hover {
-    background-color: #655447;
+    background-color: #483c33;
 }
 
+/* 방명록 카드 목록 레이아웃 (지그재그/메모지 스타일) */
 .guestbook-list {
-    max-width: 500px;
+    max-width: 480px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 .guestbook-item {
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #eae3dc;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e6ded6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
     text-align: left;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+/* 홀수/짝수 번째 카드가 살짝 다른 방향으로 기울어지게 연출 (포스트잇 느낌) */
+.guestbook-item:nth-child(odd) {
+    transform: rotate(-1deg);
+}
+
+.guestbook-item:nth-child(even) {
+    transform: rotate(1.2deg);
+}
+
+.guestbook-item:hover {
+    transform: rotate(0deg) scale(1.01);
 }
 
 .guestbook-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    align-items: center;
+    margin-bottom: 10px;
     font-size: 13px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 8px;
 }
 
 .guest-name {
     font-weight: bold;
     color: #4a3f35;
+    font-size: 15px;
 }
 
 .guest-date {
-    color: #999;
+    color: #aaa;
+    font-size: 12px;
 }
 
 .guest-message {
     font-size: 14px;
     color: #333;
-    line-height: 1.4;
+    line-height: 1.5;
     word-break: break-all;
+    white-space: pre-wrap;
 }
 
 .no-guestbook {
     text-align: center;
     color: #888;
     font-size: 14px;
-    padding: 20px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px dashed #dcd3cb;
 }
