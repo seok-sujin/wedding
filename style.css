@@ -79,11 +79,6 @@ background-image: none !important;
   color: #4a4740;
 }
 
-.card-names {
-    font-family: 'Cafe24Lovingu' !important;
-   /* font-size: 0.8rem !important; /* 필기체 특성상 글씨가 작아 보일 수 있어 기존보다 크기를 살짝 키워주면 예쁩니다 */
-}
-
 .decorated-star {
     display: inline-flex;
     align-items: center;
