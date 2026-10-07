@@ -1119,3 +1119,31 @@ body {
     /* 전체 배경을 특정 색으로 강제 고정하기보다, 각 섹션별 배경색(#fcf8f8 등)이 잘 보이도록 둡니다 */
 }
 
+/* 시스템 다크모드 감지 시 색상 반전 방지 및 라이트 모드 고정 */
+:root {
+  color-scheme: light only;
+}
+
+html, body {
+  -webkit-text-size-adjust: 100%;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+}
+
+/* ================= 📱 모바일 브라우저 다크모드 및 색상 변환 방지 ================= */
+:root {
+  color-scheme: light only !important;
+  supported-color-schemes: light !important;
+}
+
+html, body {
+  background-color: #fcf8f8 !important; /* 전체 배경색 강제 고정 */
+  color-scheme: light only !important;
+  -webkit-text-size-adjust: 100% !important;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+}
+
+meta[name="color-scheme"] {
+  content: light !important;
+}
