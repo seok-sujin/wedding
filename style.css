@@ -1133,17 +1133,34 @@ html, body {
 /* ================= 📱 모바일 브라우저 다크모드 및 색상 변환 방지 ================= */
 :root {
   color-scheme: light only !important;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background-color: #2b1c16 !important; /* 원하시는 배경색으로 고정 */
+  color: #e2e8f0;
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  color-scheme: light only !important;
+}
+/* ================= 📱 모바일 브라우저 다크모드 및 색상 변환 방지 ================= */
+:root {
+  color-scheme: light only !important;
   supported-color-schemes: light !important;
 }
 
 html, body {
-  background-color: #fcf8f8 !important; /* 전체 배경색 강제 고정 */
+  background-color: #2b1c16 !important; /* 전체 배경색 강제 고정 (원하는 컬러 코드) */
   color-scheme: light only !important;
   -webkit-text-size-adjust: 100% !important;
   -webkit-print-color-adjust: exact !important;
   color-adjust: exact !important;
 }
 
-meta[name="color-scheme"] {
-  content: light !important;
+/* 이미지나 카드 요소들이 강제로 색반전 되는 것 방지 */
+img, .envelope, .letter-sheet {
+  color-scheme: light only !important;
+  filter: none !important;
 }
