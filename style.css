@@ -1164,3 +1164,36 @@ img, .envelope, .letter-sheet {
   color-scheme: light only !important;
   filter: none !important;
 }
+
+/* ================= 🌙 모바일 강제 다크모드 색상 반전 방지 최종 차단 ================= */
+
+/* 1. 시스템 다크모드 감지 시 브라우저가 색상을 강제로 바꾸지 못하도록 고정 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light !important;
+  }
+  
+  html, body {
+    background-color: #2b1c16 !important; /* 본인의 원래 배경색 코드 */
+    color: #e2e8f0 !important;             /* 본인의 원래 글자색 코드 */
+  }
+
+  /* 카드가 들어가는 영역이나 배경 박스들 색상 유지 */
+  .card-style, .main-cover, .content-section, div, section {
+    background-color: inherit !important;
+    color: inherit !important;
+  }
+}
+
+/* 2. 웹킷(사파리/크롬 인앱) 브라우저의 강제 반전 필터 무력화 */
+html {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+
+/* 3. 이미지나 카드 내부 요소들이 어둡게 보정되는 것 방지 */
+img, .envelope, .letter-sheet, .main-photo-area img {
+  -webkit-filter: none !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
