@@ -297,5 +297,14 @@ photo번호, 갤러리번호, openModal(번호) 총 3개를 꼭 변경해주세�
     window.addEventListener('DOMContentLoaded', applyLightMode);
   })();
 </script>
+  <script>
+  // 모바일 브라우저 다크모드 강제 반전 차단 스크립트
+  document.documentElement.style.colorScheme = 'light';
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('*').forEach(el => {
+      el.style.colorScheme = 'light';
+    });
+  });
+</script>
 </body>
 </html>
