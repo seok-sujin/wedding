@@ -281,5 +281,18 @@ photo번호, 갤러리번호, openModal(번호) 총 3개를 꼭 변경해주세�
   </div>
 
   <script src="script.js"></script>
+  <script>
+  (function() {
+    // 페이지가 로드되거나 다크모드가 감지되면 인라인 스타일로 원래 색상 강제 적용
+    const applyLightMode = () => {
+      document.documentElement.style.setProperty('color-scheme', 'light', 'important');
+      document.body.style.backgroundColor = '#2b1c16'; // 원하시는 원래 배경색 코드
+      document.body.style.color = '#e2e8f0';
+    };
+    
+    applyLightMode();
+    window.addEventListener('DOMContentLoaded', applyLightMode);
+  })();
+</script>
 </body>
 </html>
