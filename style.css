@@ -1130,70 +1130,32 @@ html, body {
   color-adjust: exact !important;
 }
 
-/* ================= 📱 모바일 브라우저 다크모드 및 색상 변환 방지 ================= */
-:root {
-  color-scheme: light only !important;
-}
-
-html, body {
-  width: 100%;
-  min-height: 100%;
-  background-color: #2b1c16 !important; /* 원하시는 배경색으로 고정 */
-  color: #e2e8f0;
-  font-family: 'Noto Sans KR', -apple-system, sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-  color-scheme: light only !important;
-}
-/* ================= 📱 모바일 브라우저 다크모드 및 색상 변환 방지 ================= */
+/* ================= 📱 모바일 다크모드 및 색상 반전 완전 차단 ================= */
 :root {
   color-scheme: light only !important;
   supported-color-schemes: light !important;
 }
 
-html, body {
-  background-color: #2b1c16 !important; /* 전체 배경색 강제 고정 (원하는 컬러 코드) */
-  color-scheme: light only !important;
-  -webkit-text-size-adjust: 100% !important;
-  -webkit-print-color-adjust: exact !important;
-  color-adjust: exact !important;
-}
-
-/* 이미지나 카드 요소들이 강제로 색반전 되는 것 방지 */
-img, .envelope, .letter-sheet {
-  color-scheme: light only !important;
-  filter: none !important;
-}
-
-/* ================= 🌙 모바일 강제 다크모드 색상 반전 방지 최종 차단 ================= */
-
-/* 1. 시스템 다크모드 감지 시 브라우저가 색상을 강제로 바꾸지 못하도록 고정 */
+/* 시스템 다크모드가 작동하더라도 배경색과 글자색이 절대 바뀌지 않도록 강제 고정 */
 @media (prefers-color-scheme: dark) {
   :root {
-    color-scheme: light !important;
+    color-scheme: light only !important;
+  }
+  html, body {
+    background-color: #2b1c16 !important; /* 본인의 원래 배경색 (진한 브라운) */
+    color: #e2e8f0 !important;             /* 본인의 원래 글자색 */
   }
   
-  html, body {
-    background-color: #2b1c16 !important; /* 본인의 원래 배경색 코드 */
-    color: #e2e8f0 !important;             /* 본인의 원래 글자색 코드 */
-  }
-
-  /* 카드가 들어가는 영역이나 배경 박스들 색상 유지 */
-  .card-style, .main-cover, .content-section, div, section {
-    background-color: inherit !important;
-    color: inherit !important;
+  /* 내부 박스나 카드들도 시스템 다크모드의 영향을 받지 않게 차단 */
+  div, section, article, .card-style, .main-cover, .content-section {
+    color-scheme: light only !important;
   }
 }
 
-/* 2. 웹킷(사파리/크롬 인앱) 브라우저의 강제 반전 필터 무력화 */
-html {
-  -webkit-filter: none !important;
-  filter: none !important;
-}
-
-/* 3. 이미지나 카드 내부 요소들이 어둡게 보정되는 것 방지 */
-img, .envelope, .letter-sheet, .main-photo-area img {
+/* 사파리 및 인앱 브라우저의 강제 반전 필터/블렌드모드 무력화 */
+html, body, img, .envelope, .letter-sheet, .main-photo-area img {
   -webkit-filter: none !important;
   filter: none !important;
   mix-blend-mode: normal !important;
+  color-scheme: light only !important;
 }
