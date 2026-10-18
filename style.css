@@ -1101,50 +1101,36 @@ body::before {
   color: #fff8f6;
 }
 
-/* ================= 📱 모바일 다크모드 강제 반전 완벽 차단 (최종) ================= */
+/* ================= 📱 모바일 다크모드 반전 완전 차단 ================= */
 :root {
   color-scheme: light only !important;
-  supported-color-schemes: light !important;
 }
 
-/* 시스템 다크모드가 켜져 있더라도 웹사이트 전체 색상 고정 */
+html, body {
+  background-color: #2b1c16 !important;
+  color: #e2e8f0 !important;
+  color-scheme: light only !important;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: light only !important;
-  }
-  
-  /* 배경과 글자색 강제 고정 */
-  html, body {
+  :root, html, body {
     background-color: #2b1c16 !important;
     color: #e2e8f0 !important;
     color-scheme: light only !important;
   }
-
-  /* 모든 내부 요소(박스, 카드, 글자 등)가 다크모드에 반응하지 않도록 상속 차단 */
-  *, *:before, *:after {
-    color-scheme: light only !important;
-  }
 }
 
-/* 사파리 및 인앱 브라우저의 강제 반전 필터 무력화 */
-html, body, img, div, section, span, p {
-  -webkit-filter: none !important;
-  filter: none !important;
-  mix-blend-mode: normal !important;
-  color-scheme: light only !important;
-}
-
-/* ================= 🎨 다크모드 배경 반전 원천 봉쇄용 레이어 스타일 ================= */
 .force-light-bg {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  background-color: #2b1c16 !important; /* 원하시는 기존 배경색 고정 */
-  z-index: -9999 !important; /* 모든 콘텐츠 뒤에 깔림 */
+  background-color: #2b1c16 !important;
+  z-index: -9999 !important;
   pointer-events: none !important;
 }
+
 
 /* 시스템 다크모드가 켜져 있어도 HTML/BODY 기본 배경색도 같이 유지 */
 @media (prefers-color-scheme: dark) {
